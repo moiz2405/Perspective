@@ -14,11 +14,8 @@ def generate_opposite_perspective(article_text):
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json"
     }
-    
-   
-    final_prompt = get_opposite_perspective_prompt(article_text)
-    
-    
+    # final_prompt = get_opposite_perspective_prompt(article_text)
+    final_prompt = get_opposite_perspective_prompt().format(article_text=article_text)
     payload = {
         "model": "deepseek/deepseek-chat",
         "messages": [
@@ -28,7 +25,6 @@ def generate_opposite_perspective(article_text):
             }
         ]
     }
-    
     response = requests.post(PERSPECTIVE_URL, headers=headers, json=payload)
     result = response.json()['choices'][0]['message']['content']
     
